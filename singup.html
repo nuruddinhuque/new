@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+   <img src="NextSure logo New.png" width="80" alt="logo">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login / Sign Up</title>
+  <link rel="stylesheet" href="Singup.css">
+</head>
+<body>
+  
+  <div class="container" role="main" aria-labelledby="auth-heading">
+    
+
+    <section class="form-area" aria-label="Authentication forms">
+      
+<form>
+     
+      
+<button> Sign Up</button>
+        
+      </form>
+
+      <!-- SIGN UP -->
+       <div class="mb-3 input-group" x-data="{ mobile_number: window.Livewire.find('nMFuV7vAMZmIi0alT3YX').entangle('mobile_number') }">
+        <span class="input-group-text">+88</span>
+        <input type="text" class="form-control" x-model="mobile_number" @input="mobile_number = mobile_number.replace(/\D/g, '')" placeholder="Mobile Number">
+        <button class="btn btn-primary" id="sendOtp" wire:click="send_otp">Send OTP</button>
+      </div>
+
+      <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+
+      <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+      <div class="row">
+        <div class="my-3 text-center col-12">
+          <a class="custom-a-login" href="Admin Dashboard.html" wire:click.prevent="$set('screen', 'email_login')">Login with Email</a>
+        </div>
+      </div>
+   
+  <!--[if ENDBLOCK]><![endif]-->
+
+  <!--[if BLOCK]><![endif]--><!--[if ENDBLOCK]><![endif]-->
+
+  <!--[if BLOCK]><![endif]-->    <div class="separator">OR</div>
+    <div class="social-logins">
+      <a class="google-sign-in" href="Admin Dashboard.html">
+        
+        <div class=content-wrapper>
+          <div class='logo-wrapper'>
+            <img src="Socail Icone.png" width="30" alt="logo">
+          </div>
+          <span class='text-container'>
+            <span>Continue with Google</span>
+          </span>
+        </div>
+      </a>
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+      <a class="apple-sign-in" href="Admin Dashboard.html">
+        <span class="icon is-medium me-2">
+          <i class="fab fa-apple"></i>
+        </span>
+        <span>Continue with Apple</span>
+      </a>
+    </div>
+       
+        <p id="signup-msg" class="helper" aria-live="polite"></p>
+      
+    </section>
+     <!-- ROW 3: CONTACT INFORMATION -->
+    <div class="contact-row">
+        <h2>How to contact Nextsure</h2>
+        <p class="mb-4">To know more about travel insurance and for any other information, reach out to our support team.</p>
+        <div class="contact-details">
+            <div class="contact-item">
+                <i class="contact-icon fas fa-phone"></i>
+                Customer Support Hotline: <a href="tel:+8801601276954">+88 01601-276954</a>
+            </div>
+            <div class="contact-item">
+                <i class="contact-icon fas fa-envelope"></i>
+                E-mail: <a href="mailto:nextsure.xzy@.com">nextsure.xzy@.com</a>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <script>
+    // Tab switching
+    const tabLogin = document.getElementById('tab-login');
+    const tabSignup = document.getElementById('tab-signup');
+    const panelLogin = document.getElementById('panel-login');
+    const panelSignup = document.getElementById('panel-signup');
+
+    function showLogin(){
+      tabLogin.classList.add('active'); tabLogin.setAttribute('aria-selected','true');
+      tabSignup.classList.remove('active'); tabSignup.setAttribute('aria-selected','false');
+      panelLogin.hidden = false; panelSignup.hidden = true;
+    }
+    function showSignup(){
+      tabSignup.classList.add('active'); tabSignup.setAttribute('aria-selected','true');
+      tabLogin.classList.remove('active'); tabLogin.setAttribute('aria-selected','false');
+      panelSignup.hidden = false; panelLogin.hidden = true;
+    }
+    tabLogin.addEventListener('click', showLogin);
+    tabSignup.addEventListener('click', showSignup);
+
+    // Password show/hide toggle
+    document.querySelectorAll('.password-toggle').forEach(btn=>{
+      btn.addEventListener('click', ()=>{
+        const input = document.getElementById(btn.dataset.target);
+        if(!input) return;
+        if(input.type === 'password'){ input.type = 'text'; btn.textContent = 'Hide'; }
+        else { input.type = 'password'; btn.textContent = 'Show'; }
+      });
+    });
+
+    // Simple client-side form handling (mock)
+    document.getElementById('panel-login').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const email = e.target.email.value.trim();
+      const pass = e.target.password.value;
+      const msg = document.getElementById('login-msg');
+      // Basic validation
+      if(!email || !pass){ msg.textContent = 'Please fill email and password.'; msg.className='error'; return; }
+      // Mock authentication (replace with real API)
+      if(email === 'demo@example.com' && pass === 'demo123'){
+        msg.textContent = 'Login successful — welcome back! (demo)'; msg.className='success';
+      } else {
+        msg.textContent = 'This is a demo form: credentials not real. Replace with API call.'; msg.className='helper';
+      }
+    });
+
+    document.getElementById('panel-signup').addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const name = e.target.name.value.trim();
+      const email = e.target.email.value.trim();
+      const pass = e.target.password.value;
+      const confirm = e.target.passwordConfirm.value;
+      const msg = document.getElementById('signup-msg');
+
+      if(!name || !email || !pass || !confirm){ msg.textContent = 'Please complete all fields.'; msg.className='error'; return; }
+      if(pass.length < 8){ msg.textContent = 'Password must be at least 8 characters.'; msg.className='error'; return; }
+      if(pass !== confirm){ msg.textContent = 'Passwords do not match.'; msg.className='error'; return; }
+
+      // Mock "account created"
+      msg.textContent = 'Account created (mock). In production send data to your server and handle securely.'; msg.className='success';
+
+      // Optionally switch to login after sign up:
+      setTimeout(()=>{ showLogin(); document.getElementById('login-msg').textContent = 'Account created — please sign in.'; }, 900);
+    });
+
+    // Demo & clear buttons
+    document.getElementById('demo-login').addEventListener('click', ()=>{
+      document.getElementById('login-email').value = 'demo@example.com';
+      document.getElementById('login-password').value = 'demo123';
+      document.getElementById('login-msg').textContent = 'Demo credentials filled. Click Sign in.'; document.getElementById('login-msg').className='helper';
+    });
+    document.getElementById('clear-signup').addEventListener('click', ()=>{
+      document.getElementById('signup-name').value = '';
+      document.getElementById('signup-email').value = '';
+      document.getElementById('signup-password').value = '';
+      document.getElementById('signup-password-confirm').value = '';
+      document.getElementById('signup-msg').textContent = '';
+    });
+
+    // Accessibility: allow Enter on tabs
+    [tabLogin, tabSignup].forEach(t=>{
+      t.addEventListener('keydown', (e)=>{ if(e.key === 'Enter' || e.key === ' ') t.click(); });
+    });
+  </script>
+</body>
+</html>

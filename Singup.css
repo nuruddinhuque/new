@@ -1,0 +1,246 @@
+/* --- Global Reset and Setup --- */
+:root {
+    --color-primary: #082854; /* Deep Blue (Main brand color) */
+    --color-secondary: #0eb4b4; /* Teal (Accent/Action color) */
+    --color-background: #f4f7f6;
+    --color-text: #333;
+    --color-error: #ff4757;
+    --color-success: #2ed573;
+    --border-radius: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* --- Main Container & Layout --- */
+.container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin-top: 50px; /* Space for the "Home" link */
+    position: relative;
+    z-index: 10;
+}
+
+/* --- 1. HOME LINK (Header/Top Positioning) --- */
+.home-link {
+    position: absolute;
+    top: -40px; /* Position above the container */
+    left: 50%;
+    transform: translateX(-50%);
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--color-primary);
+    padding: 5px 15px;
+    background-color: #eef7f7; /* Light background for visibility */
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    font-size: 0.9em;
+    transition: color 0.3s;
+}
+.home-link:hover {
+    color: var(--color-secondary);
+}
+
+/* --- Form Elements and Input Groups --- */
+.form-area {
+    margin-top: 20px;
+}
+
+/* Base button for form submit */
+form button {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--color-primary);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius);
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 20px;
+}
+form button:hover {
+    background-color: var(--color-secondary);
+}
+
+/* Mobile Number Input Group */
+.input-group {
+    display: flex;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    overflow: hidden; /* Ensures borders look clean */
+    align-items: stretch;
+}
+
+.input-group-text {
+    background-color: #e9ecef;
+    padding: 10px 15px;
+    font-weight: 600;
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+.form-control {
+    flex-grow: 1;
+    border: none;
+    padding: 10px 15px;
+    font-size: 1em;
+    outline: none;
+}
+
+.input-group .btn-primary {
+    background-color: var(--color-secondary);
+    color: white;
+    border: none;
+    padding: 0 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 0; /* Override default button radius for the group */
+}
+.input-group .btn-primary:hover {
+    background-color: #0c9c9c;
+}
+
+/* --- Separator and Alternative Logins --- */
+.separator {
+    text-align: center;
+    margin: 25px 0;
+    font-size: 0.85em;
+    color: #999;
+    position: relative;
+}
+.separator::before,
+.separator::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 40%;
+    height: 1px;
+    background-color: #eee;
+}
+.separator::before { left: 0; }
+.separator::after { right: 0; }
+
+.custom-a-login {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+.custom-a-login:hover {
+    color: var(--color-primary);
+}
+
+/* --- Social Login Buttons --- */
+.social-logins a {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    text-align: center;
+    border-radius: var(--border-radius);
+    font-size: 1em;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.google-sign-in {
+    background-color: #4285f4; /* Google Blue */
+    color: white;
+}
+.google-sign-in:hover {
+    background-color: #357ae8;
+}
+
+.apple-sign-in {
+    background-color: #000000; /* Apple Black */
+    color: white;
+}
+.apple-sign-in:hover {
+    opacity: 0.9;
+}
+
+.content-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.logo-wrapper {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-wrapper img {
+    display: block;
+    width: 20px; /* Adjusted size for better integration */
+    height: auto;
+}
+
+/* Helper/Message Text */
+.helper {
+    font-size: 0.9em;
+    padding: 10px;
+    margin-top: 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.error {
+    background-color: #fcebeb;
+    color: var(--color-error);
+    border: 1px solid var(--color-error);
+}
+
+.success {
+    background-color: #ebfcf2;
+    color: var(--color-success);
+    border: 1px solid var(--color-success);
+}
+
+/* --- 2. CONTRACT LINK (Footer/Bottom Positioning) --- */
+.contract-link {
+    width: 100%;
+    max-width: 400px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.contract-link a {
+    color: var(--color-text);
+    font-size: 0.8em;
+    text-decoration: none;
+    border-bottom: 1px dashed var(--color-secondary);
+    transition: color 0.3s;
+}
+
+.contract-link a:hover {
+    color: var(--color-secondary);
+}

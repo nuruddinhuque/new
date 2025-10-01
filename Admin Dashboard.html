@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Admin Dashboard | Insurance Insights</title>
+    
+    <!-- Tailwind CSS CDN for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2b6cb0;
+            --primary-light: #4c85c2;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: #f3f6fb;
+            min-height: 100vh;
+        }
+        .sidebar {
+            width: 280px;
+            background-color: white;
+            box-shadow: 2px 0 5px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            position: fixed;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+        }
+        .main-content {
+            margin-left: 280px;
+            padding: 2rem;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            padding: 1.5rem;
+        }
+        /* Mobile adjustment */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: static;
+                padding: 1rem;
+            }
+            .main-content {
+                margin-left: 0;
+                padding: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Sidebar -->
+    <div class="sidebar flex flex-col justify-between">
+        <div> <img src="NextSure logo New.png" width="80" alt="logo">
+            <h1 class="text-2xl font-extrabold text-gray-800 mb-8 tracking-tight">Admin Insight</h1>
+            
+            <nav class="space-y-2">
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-xl bg-blue-100 text-blue-700 font-semibold transition duration-150">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354l.354.354L15 7.646l.707.707-3.354 3.354-1.414 1.414-2.828-2.828L5.354 7.646 8 4.354zM4 19h16"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 20v-5m0 0v-5m0 5h5m-5 0H7"></path></svg>
+                    <span>Dashboard</span>
+                </a>
+                <p class="text-xs text-gray-400 pt-4 uppercase tracking-wider">Reports</p>
+                <a href="#" class="flex items-center space-x-3 p-3 rounded-xl text-gray-600 hover:bg-gray-100 transition duration-150">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0h6"></path></svg>
+                    <span>Quote Requests</span>
+                </a>
+                <a href="https://docs.google.com/spreadsheets/d/1N2JoQlZy1D9iDRqDL0QWejFCCT_1P0g0irz7OjBIJ7Q/edit?usp=drive_link" class="flex items-center space-x-3 p-3 rounded-xl text-gray-600 hover:bg-gray-100 transition duration-150">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    
+                    <span>Plan Sales</span>
+                </a>
+            </nav>
+        </div>
+        
+        <!-- User Info -->
+        <div class="border-t pt-4">
+            <p class="text-sm font-semibold text-gray-700">User ID:</p>
+            <p id="auth-user-id" class="text-xs text-gray-500 break-all"></p>
+            <p class="text-xs text-red-500 mt-2" id="db-status">Initializing Database...</p>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <header class="mb-8 flex justify-between items-center">
+            <h2 class="text-3xl font-bold text-gray-800">Operational Overview</h2>
+            <button onclick="simulateDataUpdate()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition duration-150 shadow-md">
+                Simulate New Quote
+            </button>
+        </header>
+
+        <!-- Metric Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+            <!-- Card 1: Total Quote Requests -->
+            <div class="card border-l-4 border-blue-500">
+                <p class="text-sm font-medium text-gray-500">Total Quote Requests</p>
+                <p id="metric-quotes" class="text-3xl font-extrabold text-gray-900 mt-1">0</p>
+                <span class="text-xs text-gray-400 mt-1 block">Since deployment</span>
+            </div>
+
+            <!-- Card 2: Total Sign-Ups -->
+            <div class="card border-l-4 border-green-500">
+                <p class="text-sm font-medium text-gray-500">Total Sign-Ups (Mock)</p>
+                <p id="metric-signups" class="text-3xl font-extrabold text-gray-900 mt-1">0</p>
+                <span class="text-xs text-gray-400 mt-1 block">Data from sign-up form</span>
+            </div>
+
+            <!-- Card 3: CFT Plan Sales -->
+            <div class="card border-l-4 border-yellow-500">
+                <p class="text-sm font-medium text-gray-500">Corporate Plan Sales</p>
+                <p id="metric-corporate" class="text-3xl font-extrabold text-gray-900 mt-1">0</p>
+                <span class="text-xs text-gray-400 mt-1 block">Highest Value Plan</span>
+            </div>
+
+            <!-- Card 4: Monthly Revenue (Mock) -->
+            <div class="card border-l-4 border-purple-500">
+                <p class="text-sm font-medium text-gray-500">Estimated M-R (Mock)</p>
+                <p id="metric-revenue" class="text-3xl font-extrabold text-gray-900 mt-1">$0</p>
+                <span class="text-xs text-gray-400 mt-1 block">Based on plan distribution</span>
+            </div>
+        </div>
+        
+        <!-- Recent Activity Table -->
+        <div class="card">
+            <h3 class="text-xl font-semibold text-gray-800 mb-4">Recent Quote Activity</h3>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                        <tr>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Plan</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Destination</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Passport</th>
+                            <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Time</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recent-quotes-body" class="bg-white divide-y divide-gray-200">
+                        <!-- Data will be inserted here by JavaScript -->
+                        <tr><td colspan="4" class="text-center py-4 text-gray-500">No recent activity yet. Click 'Simulate New Quote' to add data.</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+ <!-- ROW 3: CONTACT INFORMATION -->
+    <div class="contact-row">
+        <h2>How to contact Nextsure</h2>
+        <p class="mb-4">To know more about travel insurance and for any other information, reach out to our support team.</p>
+        <div class="contact-details">
+            <div class="contact-item">
+                <i class="contact-icon fas fa-phone"></i>
+                Customer Support Hotline: <a href="tel:+8801601276954">+88 01601-276954</a>
+            </div>
+            <div class="contact-item">
+                <i class="contact-icon fas fa-envelope"></i>
+                E-mail: <a href="mailto:nextsure.xzy@.com">nextsure.xzy@.com</a>
+            </div>
+        </div>
+    </div>
+    <!-- Firebase and Dashboard Logic -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, onSnapshot, collection, query, limit, orderBy, runTransaction, Timestamp, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { setLogLevel } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Set Firebase logging to Debug for better development visibility
+        setLogLevel('Debug');
+
+        // --- GLOBAL VARIABLES (Provided by Canvas Environment) ---
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        const firebaseConfig = JSON.parse(typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : null;
+
+        let db, auth, userId;
+        const METRICS_DOC_PATH = (uid) => `artifacts/${appId}/users/${uid}/dashboard_metrics/summary`;
+        const QUOTES_COLLECTION_PATH = (uid) => `artifacts/${appId}/users/${uid}/quote_requests`;
+
+        // --- INITIALIZATION AND AUTHENTICATION ---
+        const initFirebase = async () => {
+            try {
+                const app = initializeApp(firebaseConfig);
+                auth = getAuth(app);
+                db = getFirestore(app);
+
+                // Set persistence to local storage
+                await setPersistence(auth, browserLocalPersistence);
+
+                if (initialAuthToken) {
+                    await signInWithCustomToken(auth, initialAuthToken);
+                } else {
+                    await signInAnonymously(auth);
+                }
+
+                userId = auth.currentUser?.uid || crypto.randomUUID();
+                document.getElementById('auth-user-id').textContent = userId;
+                document.getElementById('db-status').textContent = 'Database Ready (Private Data)';
+                document.getElementById('db-status').classList.remove('text-red-500');
+                document.getElementById('db-status').classList.add('text-green-500');
+
+                // Start listening for data
+                setupRealtimeListeners();
+
+                // Initialize metrics if they don't exist
+                initializeMetrics();
+
+            } catch (error) {
+                console.error("Firebase Initialization Error:", error);
+                document.getElementById('db-status').textContent = `DB Error: ${error.message}`;
+            }
+        };
+
+        // --- DATA INITIALIZATION ---
+        const initializeMetrics = async () => {
+            const docRef = doc(db, METRICS_DOC_PATH(userId));
+            try {
+                const docSnap = await getDoc(docRef);
+                if (!docSnap.exists()) {
+                    await setDoc(docRef, {
+                        totalQuotes: 0,
+                        totalSignups: 0,
+                        corporateSales: 0,
+                        estimatedRevenue: 0,
+                        lastUpdate: Timestamp.now(),
+                    });
+                    console.log("Dashboard metrics initialized.");
+                }
+            } catch (e) {
+                console.error("Error initializing metrics:", e);
+            }
+        }
+
+        // --- REAL-TIME DATA LISTENERS ---
+        const setupRealtimeListeners = () => {
+            if (!db || !userId) return;
+
+            // 1. Listen to Key Metrics
+            const metricsRef = doc(db, METRICS_DOC_PATH(userId));
+            onSnapshot(metricsRef, (doc) => {
+                if (doc.exists()) {
+                    const data = doc.data();
+                    document.getElementById('metric-quotes').textContent = data.totalQuotes || 0;
+                    document.getElementById('metric-signups').textContent = data.totalSignups || 0;
+                    document.getElementById('metric-corporate').textContent = data.corporateSales || 0;
+                    document.getElementById('metric-revenue').textContent = `$${(data.estimatedRevenue || 0).toFixed(2)}`;
+                }
+            }, (error) => {
+                console.error("Error fetching metrics:", error);
+            });
+
+            // 2. Listen to Recent Quote Activity (last 10)
+            const quotesQuery = query(
+                collection(db, QUOTES_COLLECTION_PATH(userId)),
+                orderBy('timestamp', 'desc'),
+                limit(10)
+            );
+
+            onSnapshot(quotesQuery, (snapshot) => {
+                const quotesBody = document.getElementById('recent-quotes-body');
+                quotesBody.innerHTML = '';
+                
+                if (snapshot.empty) {
+                    quotesBody.innerHTML = '<tr><td colspan="4" class="text-center py-4 text-gray-500">No recent activity.</td></tr>';
+                    return;
+                }
+
+                snapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const time = data.timestamp ? data.timestamp.toDate().toLocaleTimeString() : 'N/A';
+
+                    const row = `
+                        <tr class="hover:bg-gray-50">
+                            <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">${data.plan || 'Unknown'}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${data.destination || 'N/A'}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${data.passport.slice(0, 4)}...</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${time}</td>
+                        </tr>
+                    `;
+                    quotesBody.innerHTML += row;
+                });
+            }, (error) => {
+                console.error("Error fetching recent quotes:", error);
+            });
+        };
+
+
+        // --- SIMULATION FUNCTION (FOR DEMO PURPOSES) ---
+        window.simulateDataUpdate = async () => {
+            if (!db || !userId) {
+                console.error("Database not initialized.");
+                return;
+            }
+
+            const plans = ['Business & Holiday Plan', 'Study Plan', 'Employment Plan', 'Corporate Frequent Travel'];
+            const destinations = ['USA', 'Schengen', 'Thailand', 'Japan', 'Worldwide'];
+            const basePrice = {
+                'Business & Holiday Plan': 30,
+                'Study Plan': 45,
+                'Employment Plan': 55,
+                'Corporate Frequent Travel': 99
+            };
+            
+            // Randomly select plan and values
+            const plan = plans[Math.floor(Math.random() * plans.length)];
+            const destination = destinations[Math.floor(Math.random() * destinations.length)];
+            const passportMock = 'PASS' + Math.floor(Math.random() * 9000 + 1000) + 'XXX';
+            
+            const revenueIncrease = basePrice[plan];
+            const isCorporate = plan === 'Corporate Frequent Travel';
+
+            // 1. Create a new Quote Request document
+            const quoteData = {
+                plan: plan,
+                destination: destination,
+                passport: passportMock,
+                timestamp: Timestamp.now(),
+                revenue: revenueIncrease,
+            };
+
+            try {
+                const quotesColRef = collection(db, QUOTES_COLLECTION_PATH(userId));
+                await runTransaction(db, async (transaction) => {
+                    // Add the quote request
+                    transaction.set(doc(quotesColRef), quoteData);
+                    
+                    // Update metrics summary
+                    const metricsRef = doc(db, METRICS_DOC_PATH(userId));
+                    const metricsSnap = await transaction.get(metricsRef);
+                    
+                    if (metricsSnap.exists()) {
+                        const currentData = metricsSnap.data();
+                        
+                        const newQuotes = (currentData.totalQuotes || 0) + 1;
+                        const newRevenue = (currentData.estimatedRevenue || 0) + revenueIncrease;
+                        const newCorporate = (currentData.corporateSales || 0) + (isCorporate ? 1 : 0);
+
+                        transaction.update(metricsRef, {
+                            totalQuotes: newQuotes,
+                            estimatedRevenue: newRevenue,
+                            corporateSales: newCorporate,
+                            lastUpdate: Timestamp.now(),
+                        });
+                        console.log(`Transaction complete. New Quote Added: ${plan}`);
+                    }
+                });
+
+            } catch (e) {
+                console.error("Transaction failed:", e);
+            }
+        };
+
+        // --- START APP ---
+        window.onload = initFirebase;
+    </script>
+</body>
+</html>

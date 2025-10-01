@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Nextsure Travel Insurance</title>
+    <div> <span class="smllogo">
+        <a href="NextSure logo New.png"><img src="NextSure logo New.png" width="100" alt="logo" /></a>
+        
+      </span> </div>
+    <!-- Tailwind CSS CDN for modern styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* BASE STYLES & VARIABLES */
+        :root {
+            --primary: #2b6cb0; /* Deep Blue */
+            --secondary: #63b3ed; /* Light Blue */
+            --background: #f7fafc; /* Light Gray Background */
+            --text-dark: #1a202c;
+            --text-muted: #4a5568;
+            font-family: 'Inter', sans-serif;
+        }
+        body {
+            background-color: var(--background);
+            min-height: 100vh;
+            color: var(--text-dark);
+            margin: 0;
+        }
+
+        /* ROW 1: HEADER & INTRODUCTION */
+        .header-row {
+            padding: 4rem 1.5rem;
+            background-color: white;
+            border-bottom: 8px solid var(--secondary);
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .header-row h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .header-row .intro-text {
+            max-width: 900px;
+            margin: 0 auto;
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* ROW 2: CORE CONTENT GRID */
+        .content-grid-row {
+            padding: 3rem 1.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .content-grid {
+            display: grid;
+            gap: 2rem;
+            grid-template-columns: repeat(1, 1fr); /* Mobile: 1 Column */
+        }
+        @media (min-width: 768px) {
+            .content-grid {
+                grid-template-columns: repeat(2, 1fr); /* Tablet: 2 Columns */
+            }
+        }
+
+        .content-card {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+            border-left: 5px solid var(--primary);
+            transition: transform 0.3s ease;
+        }
+        .content-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.1);
+        }
+        .content-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.75rem;
+        }
+        .content-card p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        /* ROW 3: CONTACT INFORMATION */
+        .contact-row {
+            padding: 4rem 1.5rem;
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+        }
+        .contact-row h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+        }
+        @media (min-width: 640px) {
+            .contact-details {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+        .contact-item {
+            font-size: 1.125rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .contact-item a {
+            color: white;
+            text-decoration: underline;
+            transition: opacity 0.2s;
+        }
+        .contact-item a:hover {
+            opacity: 0.8;
+        }
+        .contact-icon {
+            color: var(--secondary);
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Font Awesome (for icons) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- ROW 1: HEADER & INTRODUCTION -->
+    <div class="header-row">
+        <h1>
+         Travel Insurance in Bangladesh</h1>
+        <p class="intro-text">
+            Buy Travel Insurance policies in Bangladesh online at Nextsure. Secure yourself and your loved ones while travelling abroad with comprehensive travel health insurance which provides coverage against unexpected events and medical emergencies.
+        </p>
+    </div>
+
+    <!-- ROW 2: CORE CONTENT GRID -->
+    <div class="content-grid-row">
+        <div class="content-grid">
+
+            <!-- CARD 1: Purpose of Insurance -->
+            <div class="content-card">
+                <h2>Purpose & Coverage</h2>
+                <p>
+                    Travel Insurance (Overseas Mediclaim Policy) provides essential coverage for Bangladeshi nationals visiting abroad for various purposes: business, holidays, study, employment, or temporary residency. It protects against accidents, illness, death, and medical expenses incurred outside of Bangladesh.
+                </p>
+            </div>
+
+            <!-- CARD 2: Mandatory Requirement -->
+            <div class="content-card">
+                <h2>Visa Requirements & Schengen</h2>
+                <p>
+                    Many countries, including the UK, Turkey, Egypt, Oman, and all **Schengen Countries** (like France, Germany, Italy), require mandatory travel health insurance for visa application. We provide policies that meet the required coverage limits ($30,000 / €30,000).
+                </p>
+            </div>
+
+            <!-- CARD 3: Claim Settlement Basis -->
+            <div class="content-card">
+                <h2>Basis of Claim Settlement</h2>
+                <p>
+                    The policy pays up to the limit of cover shown on your Schedule, subject to a Deductible (except for Schengen Countries). This covers related medical expenses, reasonably and necessarily incurred outside of Bangladesh as a direct result of injury, disease, sickness, or death during the Period of Insurance.
+                </p>
+            </div>
+
+            <!-- CARD 4: Cashless Treatment & Support -->
+            <div class="content-card">
+                <h2>Emergency Assistance</h2>
+                <p>
+                    You can contact the Third Party Administrator (TPA) for local medical assistance such as evacuation, transfers, and referrals. Cashless hospital treatment can be arranged by contacting the TPA, though availability may vary by location. Details are provided on your policy documents.
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ROW 3: CONTACT INFORMATION -->
+    <div class="contact-row">
+        <h2>How to contact Nextsure</h2>
+        <p class="mb-4">To know more about travel insurance and for any other information, reach out to our support team.</p>
+        <div class="contact-details">
+            <div class="contact-item">
+                <i class="contact-icon fas fa-phone"></i>
+                Customer Support Hotline: <a href="tel:+8801601276954">+88 01601-276954</a>
+            </div>
+            <div class="contact-item">
+                <i class="contact-icon fas fa-envelope"></i>
+                E-mail: <a href="mailto:nextsure.xzy@.com">nextsure.xzy@.com</a>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
